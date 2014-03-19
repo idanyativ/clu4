@@ -68,11 +68,24 @@ function sendValueToServer(value) {
             } else {
 
                 // if not null - build the page 
-                length = result.results.length;
-                resultsInString = JSON.parse(JSON.stringify(result));
+//                var i = JSON.parse(result);
+//                alert(JSON.parse(result));
+//                alert(i.results);
+//                length = i.results.length;
+//                resultsInString = JSON.parse(JSON.stringify(result));
+//                threeResults = cutResults(resultsInString);
+//                image = result.imageURL;
+//                buildPage2(threeResults, image);
+                
+                var i = JSON.parse(result);
+                alert(JSON.parse(result));
+                alert(i.results);
+                length = i.results.length;
+                resultsInString = JSON.parse(JSON.stringify(i.results));
                 threeResults = cutResults(resultsInString);
-                image = result.imageURL;
+                image = i.imageURL;
                 buildPage2(threeResults, image);
+                
 
             }
         }
@@ -174,7 +187,7 @@ function buildPage2(res, image)
     $('#resultImages').css({"background-image": "url" + "(" + image + ")", "background-repeat": "no-repeat", "background-size": "100% 100%"});
     showOnlyValue();
 var carousels= {};
-
+alert(res);
     var listValues = res;
   var  holder = document.getElementById("resultContentForm");
 //$(resultsList).append("<ul id=\idan" + 1 + ">");
@@ -192,7 +205,7 @@ var carousels= {};
             $(resultsList).append("<ul id=\idan" + i + ">");
             var resultsList2 = document.getElementById("idan" + i);
             $(resultsList2).append("<li class=\"pane1\">white</li>");
-            $(resultsList2).append("<li class=\"pane2\"><a>" + result.results[i] + "</a></li>");
+            $(resultsList2).append("<li class=\"pane2\"><a>" + res[i] + "</a></li>");
 //            $(resultsList2).append("<li class=\"pane2\"><a>" + result.results[i].value + "</a></li>");
             $(resultsList2).append("<li class=\"pane3\">white</li>");
             $(resultsList).append("</ul>");
@@ -341,7 +354,8 @@ function getValue(i) {
 
 function cutResults(res) {
     var newRes = res;
-    newRes.results = newRes.results.splice(0, 3);
+    alert(newRes);
+    newRes = newRes.splice(0, 3);
     return newRes;
 }
 
